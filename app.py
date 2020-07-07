@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
+
+from forms import PostsForm
 app = Flask(__name__)
 
 # 2a02:c7f:8ee9:1800:95f3:9430:14e8:cf52     94.11.43.81        my IP
@@ -52,15 +54,37 @@ def home():
 def about():
     return render_template('aboutpage.html', title='About')
 
-@app.route('/create')
+
+@app.route('/create', methods=['GET', 'POST'])
 def create():
-    db.create_all()
-    post = Posts(f_name='David', l_name='McCartney', title='What teh duhh', content='blah blah blah')
-    post1 = Posts(f_name='Bavid', l_name='Cartney', title='What teh geez', content='whooh blah blah')
-    db.session.add(post)
-    db.session.add(post1)
-    db.session.commit()
-    return 'Added the table and populated it with some records'
+    form = PostsForm()
+    if form.validate_on_submit():
+        post_data = Posts(
+            f_name=form.f_name.data,
+            l_name=form.l_name.data,
+            title=form.title.data,
+            content=form.content.data
+        )
+        db.session.add(post_data)
+        db.session.commit()
+        return redirect(url_for('home'))
+    else:
+        return render_template('create.html', title='Create a thing', form=form)
+
+# GET - which displays data
+# POST - which sends data from website to application
+# DELETE - deletes some data
+# Insert - sends data, but more used for updating
+
+# @app.route('/create')
+# def create():
+#     db.create_all()
+#     post = Posts(f_name='David', l_name='McCartney', title='What teh duhh', content='blah blah blah')
+#     post1 = Posts(f_name='Bavid', l_name='Cartney', title='What teh geez', content='whooh blah blah')
+#     db.session.add(post)
+#     db.session.add(post1)
+#     db.session.commit()
+#     return 'Added the table and populated it with some records'
 
 
 @app.route('/delete')

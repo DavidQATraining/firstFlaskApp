@@ -2,4 +2,27 @@
 
 {% block body_content %}
     <h1>Hello create page body</h1>
+
+    <div class="form">
+        <form method="post" action="">
+            {{ form.hidden_tag() }}
+            {{ form.f_name.label }}
+            {{ form.f_name }}
+            <br>
+            <br>
+            {{ form.l_name.label }}
+            {{ form.l_name }}
+            <br>
+            <br>
+            {{ form.title.label }}
+            {{ form.title }}
+            <br>
+            <br>
+            {{ form.content.label }}
+            {{ form.content }}
+            <br>
+            <br>
+            {{ form.submit }}
+        </form>
+    </div>
 {% endblock %}

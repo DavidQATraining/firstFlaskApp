@@ -28,7 +28,7 @@ class PostsForm(FlaskForm):
     )
 
     content = StringField(
-        'Last name',
+        'Content',
         validators=[
             DataRequired(),
             Length(min=4, max=300)
