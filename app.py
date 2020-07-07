@@ -20,7 +20,7 @@ dummyData = [
 # if you hit root or home you will still see this functionality
 @app.route('/')
 @app.route('/home')
-def hello_world():
+def home():
     return render_template('homepage.html', title='Homepage', posts=dummyData)
 
 
