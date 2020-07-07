@@ -2,4 +2,13 @@
 
 {% block body_content %}
     <h1>Hello home page body</h1>
+
+    {% for post in posts %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p><b>First name: {{ post.fName }}</b></p>
+            <p><b>Last name: {{ post.lName }}</b></p>
+            <p>{{ post.content }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}
