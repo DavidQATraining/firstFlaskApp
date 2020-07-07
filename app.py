@@ -17,6 +17,7 @@ dummyData = [
     }
 ]
 
+
 # if you hit root or home you will still see this functionality
 @app.route('/')
 @app.route('/home')
@@ -26,7 +27,7 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('aboutpage.html', title='Aboutpage')
+    return render_template('aboutpage.html', title='About')
 
 
 if __name__ == '__main__':
